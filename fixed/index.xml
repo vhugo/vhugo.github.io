@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fixeds on Victor Alves</title>
-    <link>http://127.0.0.1/fixed/</link>
+    <link>http://vhugo.github.io/fixed/</link>
     <description>Recent content in Fixeds on Victor Alves</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Wed, 16 Dec 2015 02:26:51 -0200</lastBuildDate>
-    <atom:link href="http://127.0.0.1/fixed/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://vhugo.github.io/fixed/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>about</title>
-      <link>http://127.0.0.1/about/</link>
+      <link>http://vhugo.github.io/about/</link>
       <pubDate>Wed, 16 Dec 2015 02:26:51 -0200</pubDate>
       
-      <guid>http://127.0.0.1/about/</guid>
+      <guid>http://vhugo.github.io/about/</guid>
       <description>
 
 &lt;h1 id=&#34;about-me:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;About me&lt;/h1&gt;
