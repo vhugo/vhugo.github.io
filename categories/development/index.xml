@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Victor Alves</title>
-    <link>http://vhugo.github.io/</link>
-    <description>Recent content on Victor Alves</description>
+    <title>Development on Victor Alves</title>
+    <link>http://vhugo.github.io/categories/development/</link>
+    <description>Recent content in Development on Victor Alves</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Sat, 16 Jan 2016 15:53:26 -0200</lastBuildDate>
-    <atom:link href="http://vhugo.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://vhugo.github.io/categories/development/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Experimenting with Hugo</title>
@@ -52,24 +52,6 @@ git clone https://github.com/nishanths/cocoa-hugo-theme.git themes/cocoa
 &lt;h2 id=&#34;editors-for-code-and-markdown-content:bf73ee4053585d406df98173a6a435b8&#34;&gt;Editors for code and markdown content&lt;/h2&gt;
 
 &lt;p&gt;As a developer I love text editors of all kind, but don&amp;rsquo;t like fancy IDEs as much. For years I used &lt;a href=&#34;https://macromates.com/&#34;&gt;TextMate&lt;/a&gt; and when &lt;a href=&#34;http://www.sublimetext.com/&#34;&gt;SublimeText&lt;/a&gt; showed up and I felt the need to switch editors, been using it ever since. There&amp;rsquo;s a new editor emerging from the GitHub team called &lt;a href=&#34;https://atom.io&#34;&gt;Atom&lt;/a&gt;, still miss a lot of packages that I&amp;rsquo;m used to on SublimeText, but it looks promising. SublimeText has some packages to help edit markdown, but I found a MarkDown editor called &lt;a href=&#34;http://writed.io/&#34;&gt;Writed&lt;/a&gt;, loved it.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>about</title>
-      <link>http://vhugo.github.io/about/</link>
-      <pubDate>Wed, 16 Dec 2015 02:26:51 -0200</pubDate>
-      
-      <guid>http://vhugo.github.io/about/</guid>
-      <description>
-
-&lt;h1 id=&#34;about-me:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;About me&lt;/h1&gt;
-
-&lt;p&gt;Senior software developer, husband and a little girl&amp;rsquo;s father. Co-founder of &lt;a href=&#34;https://www.substanceproject.com.br/&#34;&gt;Substance Project&lt;/a&gt; - a consultancy and software development agency based in Brazil. If you want to know more about my professional background, check my &lt;a href=&#34;https://www.dropbox.com/s/4mpbojf4m94oric/resume_victor_2015_EN.pdf?dl=0&#34;&gt;resume&lt;/a&gt; or my &lt;a href=&#34;//linkedin.com/in/vhugoalves&#34;&gt;Linkedin&lt;/a&gt; profile.&lt;/p&gt;
-
-&lt;h2 id=&#34;about-the-site:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;About the site&lt;/h2&gt;
-
-&lt;p&gt;This is where I share. This is an idea I had to test other ideas and document as I go. The site was created with &lt;a href=&#34;http://gohugo.io/&#34;&gt;HUGO&lt;/a&gt;, theme is &lt;a href=&#34;http://themes.gohugo.io/cocoa/&#34;&gt;Cocoa&lt;/a&gt; and for photo albums I used this &lt;a href=&#34;https://github.com/vhugo/hugallery/&#34;&gt;little guy&lt;/a&gt; I created myself.&lt;/p&gt;
 </description>
     </item>
     
