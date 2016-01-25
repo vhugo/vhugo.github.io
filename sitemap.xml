@@ -3,8 +3,18 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2016-01-19T17:17:16+00:00</lastmod>
+    <lastmod>2016-01-23T04:49:23-02:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/posts/ruby-on-rails-development-environment-with-docker/</loc>
+    <lastmod>2016-01-23T04:49:23-02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/how-i-made-a-static-photo-gallery-for-hugo/</loc>
+    <lastmod>2016-01-20T07:25:15-02:00</lastmod>
   </url>
   
   <url>

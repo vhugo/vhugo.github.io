@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="This is where I share experiments and ideas.">
+
+<base href="/">
+<title>
+
+
+     Ruby on Rails development environment with Docker 
+
+</title>
+<link rel="canonical" href="/posts/ruby-on-rails-development-environment-with-docker/">
+
+
+<script type="text/javascript">
+    var baseURL = '\/';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="/css/reset.css">
+<link rel="stylesheet" href="/css/pygments.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/default-skin/default-skin.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/photoswipe.min.css">
+<link rel="stylesheet" href="/css/gallery.photoswipe.css">
+
+
+
+
+
+
+
+<link rel="shortcut icon"
+
+    href="/favicon.ico"
+
+>
+
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            <a href="/"><div class="name">Victor Alves</div></a>
+            <nav>
+                <ul>
+                    <a href="/posts/"><li>Posts</li></a><a href="/gallery/"><li>Photos</li></a><a href="/about/"><li>About</li></a>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/vhugo" target="_blank">
+                <i class="icon ion-social-github"></i>
+            </a>
+        
+
+        
+            <a href="//twitter.com/vhugoalves" target="_blank">
+                <i class="icon ion-social-twitter"></i>
+            </a>
+        
+
+        
+            <a href="//linkedin.com/in/vhugoalves" target="_blank">
+                <i class="icon ion-social-linkedin"></i>
+            </a>
+        
+
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    
+        Ruby on Rails development environment with Docker
+    
+
+</div>
+
+                    <div class="initials"><a href="/">VA</a></div>
+                </div>
+                <div class="meta">
+                    <div class="date" title="Sat Jan 23 2016 04:49:23 BRST">Jan 23, 2016</div>
+                    <div class="reading-time"><div class="middot"></div>2 minutes read</div>
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<h1 id="learn-ruby-and-rails:c9f8527e984eccfd1ecfc1e835bc9ec4">Learn Ruby and Rails</h1>
+
+<p>This was how I practiced stuff I learned about Ruby and Rails, I decided to create a web application for photo gallery. For starter, I wanted to keep my dev env more clean, reason why I opt to use <a href="https://www.docker.com/">Docker</a>, I had it already installed, as well as <a href="https://www.ruby-lang.org/">Ruby</a> and <a href="rubyonrails.org/">Rails</a>.</p>
+
+<p>I created the new project with <code>rails new gallery --skip-bundle</code>, (going to install bundle in the container) it added all the files and folder I need for the Rails project, then I added everything in to a Git repository, just to keep track of it.</p>
+
+<p>Added new file called <code>Dockerfile</code> with the source I found on <a href="https://blog.codeship.com/running-rails-development-environment-docker/">Marko Locher article</a>:</p>
+
+<pre><code>    FROM ruby:2.3
+
+    # Install apt based dependencies required to run Rails as
+    # well as RubyGems. As the Ruby image itself is based on a
+    # Debian image, we use apt-get to install those.
+    RUN apt-get update &amp;&amp; apt-get install -y \
+      build-essential \
+      patch \
+      ruby-dev \
+      zlib1g-dev \
+      liblzma-dev \
+      nodejs
+
+    # Configure the main working directory. This is the base
+    # directory used in any further RUN, COPY, and ENTRYPOINT
+    # commands.
+    RUN mkdir -p /app
+    WORKDIR /app
+
+    # Copy the Gemfile as well as the Gemfile.lock and install
+    # the RubyGems. This is a separate step so the dependencies
+    # will be cached unless changes to one of those two files
+    # are made.
+    COPY Gemfile ./
+    RUN gem install bundler &amp;&amp; bundle install --jobs 20 --retry 5
+
+    # Copy the main application.
+    COPY . ./
+
+    # Expose port 3000 to the Docker host, so we can access it
+    # from the outside.
+    EXPOSE 3000
+
+    # Configure an entry point, so we don't need to specify
+    # &quot;bundle exec&quot; for each of our commands.
+    ENTRYPOINT [&quot;bundle&quot;, &quot;exec&quot;]
+
+    # The main command to run when the container starts. Also
+    # tell the Rails dev server to bind to all interfaces by
+    # default.
+    CMD [&quot;bundle&quot;, &quot;exec&quot;, &quot;rails&quot;, &quot;server&quot;, &quot;-b&quot;, &quot;0.0.0.0&quot;]
+
+</code></pre>
+
+<p>Then built the app container <code>docker build -t gallery .</code> and then started it <code>docker run -d --name gallery -v &quot;$PWD&quot;:/app -p 8080:3000 gallery</code></p>
+
+<p>Now every time I want to run any rails command, I&rsquo;m going to use the docker, it will look like this <code>docker run --rm -v &quot;$PWD&quot;:/app gallery rails g controller Albums index</code> to make things are easier for me in the console, I created an alias in my <code>~/.basj_profile</code> with the following command <code>alias dockerrun='docker run --rm -v &quot;$PWD&quot;:/app'</code> so now I can do this <code>dockerrun gallery rails g controller Albums index</code></p>
+
+                <br>
+                <p><a href="/posts/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/photoswipe.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/photoswipe-ui-default.min.js"></script>
+<script src="/js/gallery.photoswipe.js"></script>
+
+
+
+
+
+</body>
+</html>
+
