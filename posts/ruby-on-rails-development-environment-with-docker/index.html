@@ -119,7 +119,7 @@
                 </div>
                 <div class="meta">
                     <div class="date" title="Sat Jan 23 2016 04:49:23 BRST">Jan 23, 2016</div>
-                    <div class="reading-time"><div class="middot"></div>2 minutes read</div>
+                    <div class="reading-time"><div class="middot"></div>3 minutes read</div>
                 </div>
             </div>
             <div class="markdown">
@@ -127,59 +127,60 @@
 
 <h1 id="learn-ruby-and-rails:c9f8527e984eccfd1ecfc1e835bc9ec4">Learn Ruby and Rails</h1>
 
-<p>This was how I practiced stuff I learned about Ruby and Rails, I decided to create a web application for photo gallery. For starter, I wanted to keep my dev env more clean, reason why I opt to use <a href="https://www.docker.com/">Docker</a>, I had it already installed, as well as <a href="https://www.ruby-lang.org/">Ruby</a> and <a href="rubyonrails.org/">Rails</a>.</p>
+<p>This was how I created my first project to learn more about Ruby and Rails, I decided to create a web application for photo gallery. For starter, I wanted to keep my dev env isolated and more controlled, reason why I opt to use <a href="https://www.docker.com/">Docker</a>, I had it already installed, as well as <a href="https://www.ruby-lang.org/">Ruby</a> and <a href="http://rubyonrails.org/">Rails</a>.</p>
 
-<p>I created the new project with <code>rails new gallery --skip-bundle</code>, (going to install bundle in the container) it added all the files and folder I need for the Rails project, then I added everything in to a Git repository, just to keep track of it.</p>
+<p>I created the new project with <code>rails new --skip-bundle gallery</code> on my workstation, used <code>--skip-bundle</code> because I&rsquo;m going to install all Gems in the container, it added all the files and folder I needed to start my Rails project, then I added everything into a Git repository, just to keep track of my steps.</p>
 
-<p>Added new file called <code>Dockerfile</code> with the source I found on <a href="https://blog.codeship.com/running-rails-development-environment-docker/">Marko Locher article</a>:</p>
+<p>To start the Docker container setup, I&rsquo;ve Added a new file called <code>Dockerfile</code>. Thanks <a href="https://blog.codeship.com/running-rails-development-environment-docker/">Marko Locher article</a> for the kickstart, here is its content:</p>
 
-<pre><code>    FROM ruby:2.3
+<pre><code>FROM ruby:2.3
 
-    # Install apt based dependencies required to run Rails as
-    # well as RubyGems. As the Ruby image itself is based on a
-    # Debian image, we use apt-get to install those.
-    RUN apt-get update &amp;&amp; apt-get install -y \
-      build-essential \
-      patch \
-      ruby-dev \
-      zlib1g-dev \
-      liblzma-dev \
-      nodejs
+# Install apt based dependencies required to run Rails as
+# well as RubyGems. As the Ruby image itself is based on a
+# Debian image, we use apt-get to install those.
+RUN apt-get update &amp;&amp; apt-get install -y \
+  build-essential \
+  patch \
+  ruby-dev \
+  zlib1g-dev \
+  liblzma-dev \
+  nodejs
 
-    # Configure the main working directory. This is the base
-    # directory used in any further RUN, COPY, and ENTRYPOINT
-    # commands.
-    RUN mkdir -p /app
-    WORKDIR /app
+# Configure the main working directory. This is the base
+# directory used in any further RUN, COPY, and ENTRYPOINT
+# commands.
+RUN mkdir -p /app
+WORKDIR /app
 
-    # Copy the Gemfile as well as the Gemfile.lock and install
-    # the RubyGems. This is a separate step so the dependencies
-    # will be cached unless changes to one of those two files
-    # are made.
-    COPY Gemfile ./
-    RUN gem install bundler &amp;&amp; bundle install --jobs 20 --retry 5
+# Copy the Gemfile as well as the Gemfile.lock and install
+# the RubyGems. This is a separate step so the dependencies
+# will be cached unless changes to one of those two files
+# are made.
+COPY Gemfile ./
+RUN gem install bundler &amp;&amp; bundle install --jobs 20 --retry 5
 
-    # Copy the main application.
-    COPY . ./
+# Copy the main application.
+COPY . ./
 
-    # Expose port 3000 to the Docker host, so we can access it
-    # from the outside.
-    EXPOSE 3000
+# Expose port 3000 to the Docker host, so we can access it
+# from the outside.
+EXPOSE 3000
 
-    # Configure an entry point, so we don't need to specify
-    # &quot;bundle exec&quot; for each of our commands.
-    ENTRYPOINT [&quot;bundle&quot;, &quot;exec&quot;]
+# Configure an entry point, so we don't need to specify
+# &quot;bundle exec&quot; for each of our commands.
+ENTRYPOINT [&quot;bundle&quot;, &quot;exec&quot;]
 
-    # The main command to run when the container starts. Also
-    # tell the Rails dev server to bind to all interfaces by
-    # default.
-    CMD [&quot;bundle&quot;, &quot;exec&quot;, &quot;rails&quot;, &quot;server&quot;, &quot;-b&quot;, &quot;0.0.0.0&quot;]
-
+# The main command to run when the container starts. Also
+# tell the Rails dev server to bind to all interfaces by
+# default.
+CMD [&quot;bundle&quot;, &quot;exec&quot;, &quot;rails&quot;, &quot;server&quot;, &quot;-b&quot;, &quot;0.0.0.0&quot;]
 </code></pre>
 
-<p>Then built the app container <code>docker build -t gallery .</code> and then started it <code>docker run -d --name gallery -v &quot;$PWD&quot;:/app -p 8080:3000 gallery</code></p>
+<p>Then built the image with <code>docker build -t gallery .</code> and then start the app container with <code>docker run -d --name gallery -v &quot;$PWD&quot;:/app -p 8080:3000 gallery</code> if you check your browser on your container&rsquo;s address and port 8080, mine look like this <code>http://192.168.99.100:8080/</code>, then you should be able to see Rails welcome page.</p>
 
-<p>Now every time I want to run any rails command, I&rsquo;m going to use the docker, it will look like this <code>docker run --rm -v &quot;$PWD&quot;:/app gallery rails g controller Albums index</code> to make things are easier for me in the console, I created an alias in my <code>~/.basj_profile</code> with the following command <code>alias dockerrun='docker run --rm -v &quot;$PWD&quot;:/app'</code> so now I can do this <code>dockerrun gallery rails g controller Albums index</code></p>
+<h2 id="what-is-the-command-dockerrun-i-ve-been-using:c9f8527e984eccfd1ecfc1e835bc9ec4">What is the command Dockerrun I&rsquo;ve been using</h2>
+
+<p>Now every time I want to run any rails command, I&rsquo;m going to use Docker, it will look something like this <code>docker run --rm -v &quot;$PWD&quot;:/app gallery rails g controller Albums index</code> to make things easier for me in the console, I created an alias in my <code>~/.bash_profile</code> with the following command <code>alias dockerrun='docker run --rm -v &quot;$PWD&quot;:/app'</code> so now I can do this <code>dockerrun gallery rails g controller Albums index</code></p>
 
                 <br>
                 <p><a href="/posts/">Back to posts</a></p>
