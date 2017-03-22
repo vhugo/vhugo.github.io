@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Victor Alves</title>
-    <link>/</link>
+    <link>/index.xml</link>
     <description>Recent content on Victor Alves</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -17,13 +17,13 @@
       <guid>/posts/ruby-on-rails-development-environment-with-docker/</guid>
       <description>
 
-&lt;h1 id=&#34;learn-ruby-and-rails:c9f8527e984eccfd1ecfc1e835bc9ec4&#34;&gt;Learn Ruby and Rails&lt;/h1&gt;
+&lt;h1 id=&#34;learning-ruby-and-rails&#34;&gt;Learning Ruby and Rails&lt;/h1&gt;
 
 &lt;p&gt;This was how I created my first project to learn more about Ruby and Rails, I decided to create a web application for photo gallery. For starter, I wanted to keep my dev env isolated and more controlled, reason why I opt to use &lt;a href=&#34;https://www.docker.com/&#34;&gt;Docker&lt;/a&gt;, I had it already installed, as well as &lt;a href=&#34;https://www.ruby-lang.org/&#34;&gt;Ruby&lt;/a&gt; and &lt;a href=&#34;http://rubyonrails.org/&#34;&gt;Rails&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;I created the new project with &lt;code&gt;rails new --skip-bundle gallery&lt;/code&gt; on my workstation, used &lt;code&gt;--skip-bundle&lt;/code&gt; because I&amp;rsquo;m going to install all Gems in the container, it added all the files and folder I needed to start my Rails project, then I added everything into a Git repository, just to keep track of my steps.&lt;/p&gt;
 
-&lt;p&gt;To start the Docker container setup, I&amp;rsquo;ve Added a new file called &lt;code&gt;Dockerfile&lt;/code&gt;. Thanks &lt;a href=&#34;https://blog.codeship.com/running-rails-development-environment-docker/&#34;&gt;Marko Locher article&lt;/a&gt; for the kickstart, here is its content:&lt;/p&gt;
+&lt;p&gt;To start the Docker container setup, I&amp;rsquo;ve Added a new file called &lt;code&gt;Dockerfile&lt;/code&gt;. Thanks &lt;a href=&#34;https://blog.codeship.com/running-rails-development-environment-docker/&#34;&gt;Marko Locher&amp;rsquo;s&lt;/a&gt; article for the kickstart, here is its content:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;FROM ruby:2.3
 
@@ -70,7 +70,7 @@ CMD [&amp;quot;bundle&amp;quot;, &amp;quot;exec&amp;quot;, &amp;quot;rails&amp;q
 
 &lt;p&gt;Then built the image with &lt;code&gt;docker build -t gallery .&lt;/code&gt; and then start the app container with &lt;code&gt;docker run -d --name gallery -v &amp;quot;$PWD&amp;quot;:/app -p 8080:3000 gallery&lt;/code&gt; if you check your browser on your container&amp;rsquo;s address and port 8080, mine look like this &lt;code&gt;http://192.168.99.100:8080/&lt;/code&gt;, then you should be able to see Rails welcome page.&lt;/p&gt;
 
-&lt;h2 id=&#34;what-is-the-command-dockerrun-i-ve-been-using:c9f8527e984eccfd1ecfc1e835bc9ec4&#34;&gt;What is the command Dockerrun I&amp;rsquo;ve been using&lt;/h2&gt;
+&lt;h2 id=&#34;what-is-the-command-dockerrun-i-ve-been-using&#34;&gt;What is the command Dockerrun I&amp;rsquo;ve been using&lt;/h2&gt;
 
 &lt;p&gt;Now every time I want to run any rails command, I&amp;rsquo;m going to use Docker, it will look something like this &lt;code&gt;docker run --rm -v &amp;quot;$PWD&amp;quot;:/app gallery rails g controller Albums index&lt;/code&gt; to make things easier for me in the console, I created an alias in my &lt;code&gt;~/.bash_profile&lt;/code&gt; with the following command &lt;code&gt;alias dockerrun=&#39;docker run --rm -v &amp;quot;$PWD&amp;quot;:/app&#39;&lt;/code&gt; so now I can do this &lt;code&gt;dockerrun gallery rails g controller Albums index&lt;/code&gt;&lt;/p&gt;
 </description>
@@ -88,11 +88,11 @@ CMD [&amp;quot;bundle&amp;quot;, &amp;quot;exec&amp;quot;, &amp;quot;rails&amp;q
 &lt;p&gt;&lt;strong&gt;updated:&lt;/strong&gt; I&amp;rsquo;ve named this project &lt;a href=&#34;https://github.com/vhugo/hugallery&#34;&gt;Hugallery&lt;/a&gt; and I share and maintain its code at Github, if you&amp;rsquo;re interested go check it out. Also the &lt;code&gt;README.md&lt;/code&gt; file looks way better and up-to-date than this articles.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&#34;goal:ff58f790fd17f972dd5a07cd745ef2db&#34;&gt;Goal&lt;/h2&gt;
+&lt;h2 id=&#34;goal&#34;&gt;Goal&lt;/h2&gt;
 
 &lt;p&gt;Create a command-line program that generate a static web photo gallery based on a given directory with raw photos files.&lt;/p&gt;
 
-&lt;h2 id=&#34;planning:ff58f790fd17f972dd5a07cd745ef2db&#34;&gt;Planning&lt;/h2&gt;
+&lt;h2 id=&#34;planning&#34;&gt;Planning&lt;/h2&gt;
 
 &lt;p&gt;Things I want to accomplish in this project:
 - It must be easy to install and use;
@@ -100,11 +100,11 @@ CMD [&amp;quot;bundle&amp;quot;, &amp;quot;exec&amp;quot;, &amp;quot;rails&amp;q
 - It must be reusable for existing galleries;
 - It should create file compatible with &lt;a href=&#34;https://gohugo.io/&#34;&gt;HUGO&lt;/a&gt; standards;&lt;/p&gt;
 
-&lt;h2 id=&#34;workflow:ff58f790fd17f972dd5a07cd745ef2db&#34;&gt;Workflow&lt;/h2&gt;
+&lt;h2 id=&#34;workflow&#34;&gt;Workflow&lt;/h2&gt;
 
 &lt;p&gt;Each album should have 2 configuration file &lt;code&gt;album.json&lt;/code&gt; and &lt;code&gt;photos.csv&lt;/code&gt; formatted as JSON. If configuration files were not created, program will create them as template and give the instruction to update the files before running the program again.&lt;/p&gt;
 
-&lt;h3 id=&#34;album-configuration-file-album-cfg:ff58f790fd17f972dd5a07cd745ef2db&#34;&gt;Album Configuration file: album.cfg&lt;/h3&gt;
+&lt;h3 id=&#34;album-configuration-file-album-cfg&#34;&gt;Album Configuration file: album.cfg&lt;/h3&gt;
 
 &lt;p&gt;&lt;code&gt;gallery_location&lt;/code&gt; (string) : Where do I put this?
 &lt;code&gt;album_name&lt;/code&gt; (string) : What do I call it?
@@ -112,26 +112,26 @@ CMD [&amp;quot;bundle&amp;quot;, &amp;quot;exec&amp;quot;, &amp;quot;rails&amp;q
 &lt;code&gt;thumbnail_max_height&lt;/code&gt; (integer): How tall should the thumbnail be?
 &lt;code&gt;thumbnail_max_width&lt;/code&gt; (integer): How wide should the thumbnail be?&lt;/p&gt;
 
-&lt;h3 id=&#34;album-configuration-file-photos-cfg:ff58f790fd17f972dd5a07cd745ef2db&#34;&gt;Album Configuration file: photos.cfg&lt;/h3&gt;
+&lt;h3 id=&#34;album-configuration-file-photos-cfg&#34;&gt;Album Configuration file: photos.cfg&lt;/h3&gt;
 
 &lt;p&gt;In this file, the &lt;code&gt;order&lt;/code&gt; of the elements/photos in the array will represent its order in the album page.
 &lt;code&gt;photos&lt;/code&gt; (array) : List of images
 &lt;code&gt;photos.title&lt;/code&gt; (string) : Name of a given image
 &lt;code&gt;photos.description&lt;/code&gt; (string) : Description  of a given image&lt;/p&gt;
 
-&lt;h2 id=&#34;figure-stuff-out:ff58f790fd17f972dd5a07cd745ef2db&#34;&gt;Figure stuff out&lt;/h2&gt;
+&lt;h2 id=&#34;figure-stuff-out&#34;&gt;Figure stuff out&lt;/h2&gt;
 
 &lt;p&gt;This is a compilation of research I did for this project before work began.&lt;/p&gt;
 
-&lt;h3 id=&#34;how-to-create-a-cli-python-tool:ff58f790fd17f972dd5a07cd745ef2db&#34;&gt;How to create a CLI Python tool&lt;/h3&gt;
+&lt;h3 id=&#34;how-to-create-a-cli-python-tool&#34;&gt;How to create a CLI Python tool&lt;/h3&gt;
 
 &lt;p&gt;Decide to use &lt;a href=&#34;https://docs.python.org/2/library/argparse.html#usage&#34;&gt;argparse&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h3 id=&#34;how-to-resize-images:ff58f790fd17f972dd5a07cd745ef2db&#34;&gt;How to resize images&lt;/h3&gt;
+&lt;h3 id=&#34;how-to-resize-images&#34;&gt;How to resize images&lt;/h3&gt;
 
 &lt;p&gt;This will show how to resize images using the command-line. I&amp;rsquo;ve used ImageMagick long time ago, going to use it again.&lt;/p&gt;
 
-&lt;h4 id=&#34;installing-imagemagick-on-mac-os-x:ff58f790fd17f972dd5a07cd745ef2db&#34;&gt;Installing ImageMagick on Mac OS X&lt;/h4&gt;
+&lt;h4 id=&#34;installing-imagemagick-on-mac-os-x&#34;&gt;Installing ImageMagick on Mac OS X&lt;/h4&gt;
 
 &lt;p&gt;Using &lt;a href=&#34;http://brew.sh/&#34;&gt;Homebrew&lt;/a&gt; on Mac OS X Yosemite 10.10.5 (14F1509):&lt;/p&gt;
 
@@ -185,7 +185,7 @@ logo.gif GIF 640x480 640x480+0+0 8-bit sRGB 256c 28.6KB 0.000u 0:00.000
 
 &lt;p&gt;the command &lt;code&gt;display&lt;/code&gt; didn&amp;rsquo;t work for me, but I don&amp;rsquo;t think I&amp;rsquo;m going to need it for now, but to see the image you can type &lt;code&gt;open logo.gif&lt;/code&gt; it should open mac&amp;rsquo;s preview.&lt;/p&gt;
 
-&lt;h4 id=&#34;converting-and-resize-images:ff58f790fd17f972dd5a07cd745ef2db&#34;&gt;Converting and resize images&lt;/h4&gt;
+&lt;h4 id=&#34;converting-and-resize-images&#34;&gt;Converting and resize images&lt;/h4&gt;
 
 &lt;p&gt;Since this project is a &lt;strong&gt;photo&lt;/strong&gt; gallery I&amp;rsquo;ll assume all file should be converted to &lt;em&gt;JPEG&lt;/em&gt;. Here is the first test for convert and resize an image. Downloaded this cool image from &lt;a href=&#34;https://www.pexels.com/photo/forest-hiking-trees-15286/&#34;&gt;Pexels&lt;/a&gt;&lt;/p&gt;
 
@@ -223,20 +223,20 @@ logo.gif GIF 640x480 640x480+0+0 8-bit sRGB 256c 28.6KB 0.000u 0:00.000
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2 id=&#34;installing:ff58f790fd17f972dd5a07cd745ef2db&#34;&gt;Installing&lt;/h2&gt;
+&lt;h2 id=&#34;installing&#34;&gt;Installing&lt;/h2&gt;
 
 &lt;p&gt;requirements
 - &lt;a href=&#34;http://docs.wand-py.org/en/0.4.2/&#34;&gt;Wand&lt;/a&gt;
 - &lt;a href=&#34;www.imagemagick.org&#34;&gt;ImageMagick&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;usage:ff58f790fd17f972dd5a07cd745ef2db&#34;&gt;Usage&lt;/h2&gt;
+&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
 
 &lt;p&gt;This is how end user should use it:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;# genstaphotogal
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;ideas-for-improvement:ff58f790fd17f972dd5a07cd745ef2db&#34;&gt;Ideas for improvement&lt;/h2&gt;
+&lt;h2 id=&#34;ideas-for-improvement&#34;&gt;Ideas for improvement&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Make it more interactive&lt;/li&gt;
@@ -245,7 +245,7 @@ logo.gif GIF 640x480 640x480+0+0 8-bit sRGB 256c 28.6KB 0.000u 0:00.000
 &lt;li&gt;Make better tests&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;write-repeatable-instructions-to-use-it:ff58f790fd17f972dd5a07cd745ef2db&#34;&gt;Write repeatable instructions to use it&lt;/h2&gt;
+&lt;h2 id=&#34;write-repeatable-instructions-to-use-it&#34;&gt;Write repeatable instructions to use it&lt;/h2&gt;
 
 &lt;p&gt;I wrote the &lt;a href=&#34;https://github.com/vhugo/hugallery/blob/master/README.md&#34;&gt;README&lt;/a&gt; file with more insights and instructions on how to install and use.&lt;/p&gt;
 </description>
@@ -268,13 +268,13 @@ logo.gif GIF 640x480 640x480+0+0 8-bit sRGB 256c 28.6KB 0.000u 0:00.000
       <guid>/posts/experimenting-with-hugo/</guid>
       <description>
 
-&lt;h1 id=&#34;experimenting-with-hugo:bf73ee4053585d406df98173a6a435b8&#34;&gt;Experimenting with Hugo&lt;/h1&gt;
+&lt;h1 id=&#34;experimenting-with-hugo&#34;&gt;Experimenting with Hugo&lt;/h1&gt;
 
 &lt;p&gt;This is my first post and I&amp;rsquo;m going to talk about how I created the site. Last time I decided to create anything like a blog it was 1999. I&amp;rsquo;m used to work with dynamic webpages with database access upon request, since 1999 websites development has changed from static files only to dynamic webpages and now it&amp;rsquo;s coming back to static file again, to improve user experience by being as fast as it can possibly be. The difference from 1999&amp;rsquo;s website development, now a days we have tools to dynamically create static files and that&amp;rsquo;s what &lt;a href=&#34;//gohugo.oi/&#34;&gt;Hugo&lt;/a&gt; does. There are many other tools like Hugo, a popular choice is &lt;a href=&#34;http://jekyllrb.com/&#34;&gt;Jekyllrb&lt;/a&gt;, I choose Hugo because it seemed simple and fast enough.&lt;/p&gt;
 
 &lt;p&gt;In case you want to see the original files I&amp;rsquo;m currently using for this experiment, I created a &lt;a href=&#34;https://github.com/vhugo/vhugo.github.io-hugosrc&#34;&gt;Github repository&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h2 id=&#34;quickstart:bf73ee4053585d406df98173a6a435b8&#34;&gt;QuickStart&lt;/h2&gt;
+&lt;h2 id=&#34;quickstart&#34;&gt;QuickStart&lt;/h2&gt;
 
 &lt;p&gt;Hugo has a good &lt;a href=&#34;http://www.gohugo.io/overview/introduction/&#34;&gt;documentation&lt;/a&gt;, in the &lt;a href=&#34;http://www.gohugo.io/overview/quickstart/&#34;&gt;quickstart section&lt;/a&gt; you can create a website under 2 minutes.&lt;/p&gt;
 
@@ -286,7 +286,7 @@ logo.gif GIF 640x480 640x480+0+0 8-bit sRGB 256c 28.6KB 0.000u 0:00.000
 
 &lt;p&gt;If you watch this video will know the basics to get started.&lt;/p&gt;
 
-&lt;h2 id=&#34;themes-and-layouts-files:bf73ee4053585d406df98173a6a435b8&#34;&gt;Themes and layouts files&lt;/h2&gt;
+&lt;h2 id=&#34;themes-and-layouts-files&#34;&gt;Themes and layouts files&lt;/h2&gt;
 
 &lt;p&gt;After the quickstart, I knew how to create site, add content and create site files, just needed to find a theme I like and start writing content. I wanted something clean and simple, so after looking at most of themes in &lt;a href=&#34;http://themes.gohugo.io/&#34;&gt;Theme Showcase&lt;/a&gt; I found &lt;a href=&#34;http://themes.gohugo.io/cocoa/&#34;&gt;Cocoa&lt;/a&gt; developed by &lt;a href=&#34;https://github.com/nishanths&#34;&gt;Nishanth Shanmugham&lt;/a&gt;. To install it I just clone the repository into themes directory in the project root directory. It looks something like this:&lt;/p&gt;
 
@@ -296,11 +296,11 @@ git clone https://github.com/nishanths/cocoa-hugo-theme.git themes/cocoa
 
 &lt;p&gt;Even though the theme is good, I still wanted to make some changes without touching the original source, so I added some new files into &lt;a href=&#34;https://github.com/vhugo/vhugo.github.io-hugosrc/tree/master/layouts&#34;&gt;layouts folder&lt;/a&gt;  which is used instead of the ones in the theme.&lt;/p&gt;
 
-&lt;h2 id=&#34;github-pages:bf73ee4053585d406df98173a6a435b8&#34;&gt;Github Pages&lt;/h2&gt;
+&lt;h2 id=&#34;github-pages&#34;&gt;Github Pages&lt;/h2&gt;
 
 &lt;p&gt;I publish the site using Github, I just created a new repo called &lt;code&gt;vhugo.github.io&lt;/code&gt; and push all files from my Hugo project&amp;rsquo;s public folder. if you want to know more about this check &lt;a href=&#34;https://pages.github.com/&#34;&gt;Github Pages&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h2 id=&#34;editors-for-code-and-markdown-content:bf73ee4053585d406df98173a6a435b8&#34;&gt;Editors for code and markdown content&lt;/h2&gt;
+&lt;h2 id=&#34;editors-for-code-and-markdown-content&#34;&gt;Editors for code and markdown content&lt;/h2&gt;
 
 &lt;p&gt;As a developer I love text editors of all kind, but don&amp;rsquo;t like fancy IDEs as much. For years I used &lt;a href=&#34;https://macromates.com/&#34;&gt;TextMate&lt;/a&gt; and when &lt;a href=&#34;http://www.sublimetext.com/&#34;&gt;SublimeText&lt;/a&gt; showed up and I felt the need to switch editors, been using it ever since. There&amp;rsquo;s a new editor emerging from the GitHub team called &lt;a href=&#34;https://atom.io&#34;&gt;Atom&lt;/a&gt;, still miss a lot of packages that I&amp;rsquo;m used to on SublimeText, but it looks promising. SublimeText has some packages to help edit markdown, but I found a MarkDown editor called &lt;a href=&#34;http://writed.io/&#34;&gt;Writed&lt;/a&gt;, loved it.&lt;/p&gt;
 </description>
@@ -314,13 +314,22 @@ git clone https://github.com/nishanths/cocoa-hugo-theme.git themes/cocoa
       <guid>/about/</guid>
       <description>
 
-&lt;h1 id=&#34;about-me:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;About me&lt;/h1&gt;
+&lt;h1 id=&#34;about-me&#34;&gt;About me&lt;/h1&gt;
 
-&lt;p&gt;I &lt;strong&gt;am&lt;/strong&gt; a software developer, husband and a little girl&amp;rsquo;s father. I am &lt;strong&gt;not&lt;/strong&gt; a professional writer, don&amp;rsquo;t hope to be. If you&amp;rsquo;re interested in my professional background, check my &lt;a href=&#34;https://www.dropbox.com/s/4mpbojf4m94oric/resume_victor_2015_EN.pdf?dl=0&#34;&gt;resume&lt;/a&gt; or my &lt;a href=&#34;//linkedin.com/in/vhugoalves&#34;&gt;Linkedin&lt;/a&gt; profile.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m software developer over 30 years of age, husband of best gal in the world
+and father of lovely and funny little girl. I was born in Brazil, but recently
+living and working in the Netherlands. Can speak fluently Portuguese and
+English. In case you&amp;rsquo;re interesting in my professional background, check out my
+&lt;a href=&#34;https://www.dropbox.com/s/4mpbojf4m94oric/resume_victor_2015_EN.pdf&#34;&gt;resume&lt;/a&gt; or
+my &lt;a href=&#34;//linkedin.com/in/vhugoalves&#34;&gt;Linkedin&lt;/a&gt; profile.&lt;/p&gt;
 
-&lt;h2 id=&#34;about-the-site:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;About the site&lt;/h2&gt;
+&lt;h2 id=&#34;about-the-site&#34;&gt;About the site&lt;/h2&gt;
 
-&lt;p&gt;This is where I share stuff. The idea was a place to have documented experiments to actually remind me of how I did stuff. The site is an experiment on its own. It was created with &lt;a href=&#34;http://gohugo.io/&#34;&gt;HUGO&lt;/a&gt; plus &lt;a href=&#34;http://themes.gohugo.io/cocoa/&#34;&gt;Cocoa&lt;/a&gt; theme and for photo albums I used this &lt;a href=&#34;https://github.com/vhugo/hugallery/&#34;&gt;little guy&lt;/a&gt;, another experiment of mine.&lt;/p&gt;
+&lt;p&gt;This is a working in progress project, it supposed to a place where a I share
+ideas and knowledge I gather from other projects and experiments. It was created
+with &lt;a href=&#34;http://gohugo.io/&#34;&gt;HUGO&lt;/a&gt; using &lt;a href=&#34;http://themes.gohugo.io/cocoa/&#34;&gt;Cocoa&lt;/a&gt;
+theme and for photo albums I used this &lt;a href=&#34;https://github.com/vhugo/hugallery/&#34;&gt;humble project&lt;/a&gt;,
+another on-going project of mine.&lt;/p&gt;
 </description>
     </item>
     

@@ -118,7 +118,7 @@
                     <div class="initials"><a href="/">VA</a></div>
                 </div>
                 <div class="meta">
-                    <div class="date" title="Wed Jan 20 2016 07:25:15 BRST">Jan 20, 2016</div>
+                    <div class="date" title="Wed Jan 20 2016 07:25:15 -0200">Jan 20, 2016</div>
                     <div class="reading-time"><div class="middot"></div>4 minutes read</div>
                 </div>
             </div>
@@ -129,11 +129,11 @@
 <p><strong>updated:</strong> I&rsquo;ve named this project <a href="https://github.com/vhugo/hugallery">Hugallery</a> and I share and maintain its code at Github, if you&rsquo;re interested go check it out. Also the <code>README.md</code> file looks way better and up-to-date than this articles.</p>
 </blockquote>
 
-<h2 id="goal:ff58f790fd17f972dd5a07cd745ef2db">Goal</h2>
+<h2 id="goal">Goal</h2>
 
 <p>Create a command-line program that generate a static web photo gallery based on a given directory with raw photos files.</p>
 
-<h2 id="planning:ff58f790fd17f972dd5a07cd745ef2db">Planning</h2>
+<h2 id="planning">Planning</h2>
 
 <p>Things I want to accomplish in this project:
 - It must be easy to install and use;
@@ -141,11 +141,11 @@
 - It must be reusable for existing galleries;
 - It should create file compatible with <a href="https://gohugo.io/">HUGO</a> standards;</p>
 
-<h2 id="workflow:ff58f790fd17f972dd5a07cd745ef2db">Workflow</h2>
+<h2 id="workflow">Workflow</h2>
 
 <p>Each album should have 2 configuration file <code>album.json</code> and <code>photos.csv</code> formatted as JSON. If configuration files were not created, program will create them as template and give the instruction to update the files before running the program again.</p>
 
-<h3 id="album-configuration-file-album-cfg:ff58f790fd17f972dd5a07cd745ef2db">Album Configuration file: album.cfg</h3>
+<h3 id="album-configuration-file-album-cfg">Album Configuration file: album.cfg</h3>
 
 <p><code>gallery_location</code> (string) : Where do I put this?
 <code>album_name</code> (string) : What do I call it?
@@ -153,26 +153,26 @@
 <code>thumbnail_max_height</code> (integer): How tall should the thumbnail be?
 <code>thumbnail_max_width</code> (integer): How wide should the thumbnail be?</p>
 
-<h3 id="album-configuration-file-photos-cfg:ff58f790fd17f972dd5a07cd745ef2db">Album Configuration file: photos.cfg</h3>
+<h3 id="album-configuration-file-photos-cfg">Album Configuration file: photos.cfg</h3>
 
 <p>In this file, the <code>order</code> of the elements/photos in the array will represent its order in the album page.
 <code>photos</code> (array) : List of images
 <code>photos.title</code> (string) : Name of a given image
 <code>photos.description</code> (string) : Description  of a given image</p>
 
-<h2 id="figure-stuff-out:ff58f790fd17f972dd5a07cd745ef2db">Figure stuff out</h2>
+<h2 id="figure-stuff-out">Figure stuff out</h2>
 
 <p>This is a compilation of research I did for this project before work began.</p>
 
-<h3 id="how-to-create-a-cli-python-tool:ff58f790fd17f972dd5a07cd745ef2db">How to create a CLI Python tool</h3>
+<h3 id="how-to-create-a-cli-python-tool">How to create a CLI Python tool</h3>
 
 <p>Decide to use <a href="https://docs.python.org/2/library/argparse.html#usage">argparse</a>.</p>
 
-<h3 id="how-to-resize-images:ff58f790fd17f972dd5a07cd745ef2db">How to resize images</h3>
+<h3 id="how-to-resize-images">How to resize images</h3>
 
 <p>This will show how to resize images using the command-line. I&rsquo;ve used ImageMagick long time ago, going to use it again.</p>
 
-<h4 id="installing-imagemagick-on-mac-os-x:ff58f790fd17f972dd5a07cd745ef2db">Installing ImageMagick on Mac OS X</h4>
+<h4 id="installing-imagemagick-on-mac-os-x">Installing ImageMagick on Mac OS X</h4>
 
 <p>Using <a href="http://brew.sh/">Homebrew</a> on Mac OS X Yosemite 10.10.5 (14F1509):</p>
 
@@ -226,7 +226,7 @@ logo.gif GIF 640x480 640x480+0+0 8-bit sRGB 256c 28.6KB 0.000u 0:00.000
 
 <p>the command <code>display</code> didn&rsquo;t work for me, but I don&rsquo;t think I&rsquo;m going to need it for now, but to see the image you can type <code>open logo.gif</code> it should open mac&rsquo;s preview.</p>
 
-<h4 id="converting-and-resize-images:ff58f790fd17f972dd5a07cd745ef2db">Converting and resize images</h4>
+<h4 id="converting-and-resize-images">Converting and resize images</h4>
 
 <p>Since this project is a <strong>photo</strong> gallery I&rsquo;ll assume all file should be converted to <em>JPEG</em>. Here is the first test for convert and resize an image. Downloaded this cool image from <a href="https://www.pexels.com/photo/forest-hiking-trees-15286/">Pexels</a></p>
 
@@ -264,20 +264,20 @@ logo.gif GIF 640x480 640x480+0+0 8-bit sRGB 256c 28.6KB 0.000u 0:00.000
 </code></pre></div>
 
 
-<h2 id="installing:ff58f790fd17f972dd5a07cd745ef2db">Installing</h2>
+<h2 id="installing">Installing</h2>
 
 <p>requirements
 - <a href="http://docs.wand-py.org/en/0.4.2/">Wand</a>
 - <a href="www.imagemagick.org">ImageMagick</a></p>
 
-<h2 id="usage:ff58f790fd17f972dd5a07cd745ef2db">Usage</h2>
+<h2 id="usage">Usage</h2>
 
 <p>This is how end user should use it:</p>
 
 <pre><code># genstaphotogal
 </code></pre>
 
-<h2 id="ideas-for-improvement:ff58f790fd17f972dd5a07cd745ef2db">Ideas for improvement</h2>
+<h2 id="ideas-for-improvement">Ideas for improvement</h2>
 
 <ul>
 <li>Make it more interactive</li>
@@ -286,7 +286,7 @@ logo.gif GIF 640x480 640x480+0+0 8-bit sRGB 256c 28.6KB 0.000u 0:00.000
 <li>Make better tests</li>
 </ul>
 
-<h2 id="write-repeatable-instructions-to-use-it:ff58f790fd17f972dd5a07cd745ef2db">Write repeatable instructions to use it</h2>
+<h2 id="write-repeatable-instructions-to-use-it">Write repeatable instructions to use it</h2>
 
 <p>I wrote the <a href="https://github.com/vhugo/hugallery/blob/master/README.md">README</a> file with more insights and instructions on how to install and use.</p>
 
@@ -295,7 +295,21 @@ logo.gif GIF 640x480 640x480+0+0 8-bit sRGB 256c 28.6KB 0.000u 0:00.000
             </div>
             <br>
             <div class="disqus">
-                
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'vhugo';
+    var disqus_identifier = '\/posts\/how-i-made-a-static-photo-gallery-for-hugo\/';
+    var disqus_title = 'How I made a static photo gallery for Hugo';
+    var disqus_url = '\/posts\/how-i-made-a-static-photo-gallery-for-hugo\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
             </div>
         </div>
     </div>

@@ -118,20 +118,20 @@
                     <div class="initials"><a href="/">VA</a></div>
                 </div>
                 <div class="meta">
-                    <div class="date" title="Sat Jan 16 2016 15:53:26 BRST">Jan 16, 2016</div>
+                    <div class="date" title="Sat Jan 16 2016 15:53:26 -0200">Jan 16, 2016</div>
                     <div class="reading-time"><div class="middot"></div>2 minutes read</div>
                 </div>
             </div>
             <div class="markdown">
                 
 
-<h1 id="experimenting-with-hugo:bf73ee4053585d406df98173a6a435b8">Experimenting with Hugo</h1>
+<h1 id="experimenting-with-hugo">Experimenting with Hugo</h1>
 
 <p>This is my first post and I&rsquo;m going to talk about how I created the site. Last time I decided to create anything like a blog it was 1999. I&rsquo;m used to work with dynamic webpages with database access upon request, since 1999 websites development has changed from static files only to dynamic webpages and now it&rsquo;s coming back to static file again, to improve user experience by being as fast as it can possibly be. The difference from 1999&rsquo;s website development, now a days we have tools to dynamically create static files and that&rsquo;s what <a href="//gohugo.oi/">Hugo</a> does. There are many other tools like Hugo, a popular choice is <a href="http://jekyllrb.com/">Jekyllrb</a>, I choose Hugo because it seemed simple and fast enough.</p>
 
 <p>In case you want to see the original files I&rsquo;m currently using for this experiment, I created a <a href="https://github.com/vhugo/vhugo.github.io-hugosrc">Github repository</a>.</p>
 
-<h2 id="quickstart:bf73ee4053585d406df98173a6a435b8">QuickStart</h2>
+<h2 id="quickstart">QuickStart</h2>
 
 <p>Hugo has a good <a href="http://www.gohugo.io/overview/introduction/">documentation</a>, in the <a href="http://www.gohugo.io/overview/quickstart/">quickstart section</a> you can create a website under 2 minutes.</p>
 
@@ -143,7 +143,7 @@
 
 <p>If you watch this video will know the basics to get started.</p>
 
-<h2 id="themes-and-layouts-files:bf73ee4053585d406df98173a6a435b8">Themes and layouts files</h2>
+<h2 id="themes-and-layouts-files">Themes and layouts files</h2>
 
 <p>After the quickstart, I knew how to create site, add content and create site files, just needed to find a theme I like and start writing content. I wanted something clean and simple, so after looking at most of themes in <a href="http://themes.gohugo.io/">Theme Showcase</a> I found <a href="http://themes.gohugo.io/cocoa/">Cocoa</a> developed by <a href="https://github.com/nishanths">Nishanth Shanmugham</a>. To install it I just clone the repository into themes directory in the project root directory. It looks something like this:</p>
 
@@ -153,11 +153,11 @@ git clone https://github.com/nishanths/cocoa-hugo-theme.git themes/cocoa
 
 <p>Even though the theme is good, I still wanted to make some changes without touching the original source, so I added some new files into <a href="https://github.com/vhugo/vhugo.github.io-hugosrc/tree/master/layouts">layouts folder</a>  which is used instead of the ones in the theme.</p>
 
-<h2 id="github-pages:bf73ee4053585d406df98173a6a435b8">Github Pages</h2>
+<h2 id="github-pages">Github Pages</h2>
 
 <p>I publish the site using Github, I just created a new repo called <code>vhugo.github.io</code> and push all files from my Hugo project&rsquo;s public folder. if you want to know more about this check <a href="https://pages.github.com/">Github Pages</a>.</p>
 
-<h2 id="editors-for-code-and-markdown-content:bf73ee4053585d406df98173a6a435b8">Editors for code and markdown content</h2>
+<h2 id="editors-for-code-and-markdown-content">Editors for code and markdown content</h2>
 
 <p>As a developer I love text editors of all kind, but don&rsquo;t like fancy IDEs as much. For years I used <a href="https://macromates.com/">TextMate</a> and when <a href="http://www.sublimetext.com/">SublimeText</a> showed up and I felt the need to switch editors, been using it ever since. There&rsquo;s a new editor emerging from the GitHub team called <a href="https://atom.io">Atom</a>, still miss a lot of packages that I&rsquo;m used to on SublimeText, but it looks promising. SublimeText has some packages to help edit markdown, but I found a MarkDown editor called <a href="http://writed.io/">Writed</a>, loved it.</p>
 
@@ -166,7 +166,21 @@ git clone https://github.com/nishanths/cocoa-hugo-theme.git themes/cocoa
             </div>
             <br>
             <div class="disqus">
-                
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'vhugo';
+    var disqus_identifier = '\/posts\/experimenting-with-hugo\/';
+    var disqus_title = 'Experimenting with Hugo';
+    var disqus_url = '\/posts\/experimenting-with-hugo\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
             </div>
         </div>
     </div>

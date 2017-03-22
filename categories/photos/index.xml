@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Galleries on Victor Alves</title>
-    <link>/gallery/index.xml</link>
-    <description>Recent content in Galleries on Victor Alves</description>
+    <title>Photos on Victor Alves</title>
+    <link>/categories/photos/index.xml</link>
+    <description>Recent content in Photos on Victor Alves</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Tue, 19 Jan 2016 17:17:16 +0000</lastBuildDate>
-    <atom:link href="/gallery/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/categories/photos/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>First trip to NY</title>

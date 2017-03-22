@@ -118,20 +118,20 @@
                     <div class="initials"><a href="/">VA</a></div>
                 </div>
                 <div class="meta">
-                    <div class="date" title="Sat Jan 23 2016 04:49:23 BRST">Jan 23, 2016</div>
+                    <div class="date" title="Sat Jan 23 2016 04:49:23 -0200">Jan 23, 2016</div>
                     <div class="reading-time"><div class="middot"></div>3 minutes read</div>
                 </div>
             </div>
             <div class="markdown">
                 
 
-<h1 id="learn-ruby-and-rails:c9f8527e984eccfd1ecfc1e835bc9ec4">Learn Ruby and Rails</h1>
+<h1 id="learning-ruby-and-rails">Learning Ruby and Rails</h1>
 
 <p>This was how I created my first project to learn more about Ruby and Rails, I decided to create a web application for photo gallery. For starter, I wanted to keep my dev env isolated and more controlled, reason why I opt to use <a href="https://www.docker.com/">Docker</a>, I had it already installed, as well as <a href="https://www.ruby-lang.org/">Ruby</a> and <a href="http://rubyonrails.org/">Rails</a>.</p>
 
 <p>I created the new project with <code>rails new --skip-bundle gallery</code> on my workstation, used <code>--skip-bundle</code> because I&rsquo;m going to install all Gems in the container, it added all the files and folder I needed to start my Rails project, then I added everything into a Git repository, just to keep track of my steps.</p>
 
-<p>To start the Docker container setup, I&rsquo;ve Added a new file called <code>Dockerfile</code>. Thanks <a href="https://blog.codeship.com/running-rails-development-environment-docker/">Marko Locher article</a> for the kickstart, here is its content:</p>
+<p>To start the Docker container setup, I&rsquo;ve Added a new file called <code>Dockerfile</code>. Thanks <a href="https://blog.codeship.com/running-rails-development-environment-docker/">Marko Locher&rsquo;s</a> article for the kickstart, here is its content:</p>
 
 <pre><code>FROM ruby:2.3
 
@@ -178,7 +178,7 @@ CMD [&quot;bundle&quot;, &quot;exec&quot;, &quot;rails&quot;, &quot;server&quot;
 
 <p>Then built the image with <code>docker build -t gallery .</code> and then start the app container with <code>docker run -d --name gallery -v &quot;$PWD&quot;:/app -p 8080:3000 gallery</code> if you check your browser on your container&rsquo;s address and port 8080, mine look like this <code>http://192.168.99.100:8080/</code>, then you should be able to see Rails welcome page.</p>
 
-<h2 id="what-is-the-command-dockerrun-i-ve-been-using:c9f8527e984eccfd1ecfc1e835bc9ec4">What is the command Dockerrun I&rsquo;ve been using</h2>
+<h2 id="what-is-the-command-dockerrun-i-ve-been-using">What is the command Dockerrun I&rsquo;ve been using</h2>
 
 <p>Now every time I want to run any rails command, I&rsquo;m going to use Docker, it will look something like this <code>docker run --rm -v &quot;$PWD&quot;:/app gallery rails g controller Albums index</code> to make things easier for me in the console, I created an alias in my <code>~/.bash_profile</code> with the following command <code>alias dockerrun='docker run --rm -v &quot;$PWD&quot;:/app'</code> so now I can do this <code>dockerrun gallery rails g controller Albums index</code></p>
 
@@ -187,7 +187,21 @@ CMD [&quot;bundle&quot;, &quot;exec&quot;, &quot;rails&quot;, &quot;server&quot;
             </div>
             <br>
             <div class="disqus">
-                
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'vhugo';
+    var disqus_identifier = '\/posts\/ruby-on-rails-development-environment-with-docker\/';
+    var disqus_title = 'Ruby on Rails development environment with Docker';
+    var disqus_url = '\/posts\/ruby-on-rails-development-environment-with-docker\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
             </div>
         </div>
     </div>

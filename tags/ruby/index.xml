@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ruby on Victor Alves</title>
+    <link>/tags/ruby/index.xml</link>
+    <description>Recent content in Ruby on Victor Alves</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <atom:link href="/tags/ruby/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Ruby on Rails development environment with Docker</title>
+      <link>/posts/ruby-on-rails-development-environment-with-docker/</link>
+      <pubDate>Sat, 23 Jan 2016 04:49:23 -0200</pubDate>
+      
+      <guid>/posts/ruby-on-rails-development-environment-with-docker/</guid>
+      <description>
+
+&lt;h1 id=&#34;learning-ruby-and-rails&#34;&gt;Learning Ruby and Rails&lt;/h1&gt;
+
+&lt;p&gt;This was how I created my first project to learn more about Ruby and Rails, I decided to create a web application for photo gallery. For starter, I wanted to keep my dev env isolated and more controlled, reason why I opt to use &lt;a href=&#34;https://www.docker.com/&#34;&gt;Docker&lt;/a&gt;, I had it already installed, as well as &lt;a href=&#34;https://www.ruby-lang.org/&#34;&gt;Ruby&lt;/a&gt; and &lt;a href=&#34;http://rubyonrails.org/&#34;&gt;Rails&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I created the new project with &lt;code&gt;rails new --skip-bundle gallery&lt;/code&gt; on my workstation, used &lt;code&gt;--skip-bundle&lt;/code&gt; because I&amp;rsquo;m going to install all Gems in the container, it added all the files and folder I needed to start my Rails project, then I added everything into a Git repository, just to keep track of my steps.&lt;/p&gt;
+
+&lt;p&gt;To start the Docker container setup, I&amp;rsquo;ve Added a new file called &lt;code&gt;Dockerfile&lt;/code&gt;. Thanks &lt;a href=&#34;https://blog.codeship.com/running-rails-development-environment-docker/&#34;&gt;Marko Locher&amp;rsquo;s&lt;/a&gt; article for the kickstart, here is its content:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FROM ruby:2.3
+
+# Install apt based dependencies required to run Rails as
+# well as RubyGems. As the Ruby image itself is based on a
+# Debian image, we use apt-get to install those.
+RUN apt-get update &amp;amp;&amp;amp; apt-get install -y \
+  build-essential \
+  patch \
+  ruby-dev \
+  zlib1g-dev \
+  liblzma-dev \
+  nodejs
+
+# Configure the main working directory. This is the base
+# directory used in any further RUN, COPY, and ENTRYPOINT
+# commands.
+RUN mkdir -p /app
+WORKDIR /app
+
+# Copy the Gemfile as well as the Gemfile.lock and install
+# the RubyGems. This is a separate step so the dependencies
+# will be cached unless changes to one of those two files
+# are made.
+COPY Gemfile ./
+RUN gem install bundler &amp;amp;&amp;amp; bundle install --jobs 20 --retry 5
+
+# Copy the main application.
+COPY . ./
+
+# Expose port 3000 to the Docker host, so we can access it
+# from the outside.
+EXPOSE 3000
+
+# Configure an entry point, so we don&#39;t need to specify
+# &amp;quot;bundle exec&amp;quot; for each of our commands.
+ENTRYPOINT [&amp;quot;bundle&amp;quot;, &amp;quot;exec&amp;quot;]
+
+# The main command to run when the container starts. Also
+# tell the Rails dev server to bind to all interfaces by
+# default.
+CMD [&amp;quot;bundle&amp;quot;, &amp;quot;exec&amp;quot;, &amp;quot;rails&amp;quot;, &amp;quot;server&amp;quot;, &amp;quot;-b&amp;quot;, &amp;quot;0.0.0.0&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then built the image with &lt;code&gt;docker build -t gallery .&lt;/code&gt; and then start the app container with &lt;code&gt;docker run -d --name gallery -v &amp;quot;$PWD&amp;quot;:/app -p 8080:3000 gallery&lt;/code&gt; if you check your browser on your container&amp;rsquo;s address and port 8080, mine look like this &lt;code&gt;http://192.168.99.100:8080/&lt;/code&gt;, then you should be able to see Rails welcome page.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-is-the-command-dockerrun-i-ve-been-using&#34;&gt;What is the command Dockerrun I&amp;rsquo;ve been using&lt;/h2&gt;
+
+&lt;p&gt;Now every time I want to run any rails command, I&amp;rsquo;m going to use Docker, it will look something like this &lt;code&gt;docker run --rm -v &amp;quot;$PWD&amp;quot;:/app gallery rails g controller Albums index&lt;/code&gt; to make things easier for me in the console, I created an alias in my &lt;code&gt;~/.bash_profile&lt;/code&gt; with the following command &lt;code&gt;alias dockerrun=&#39;docker run --rm -v &amp;quot;$PWD&amp;quot;:/app&#39;&lt;/code&gt; so now I can do this &lt;code&gt;dockerrun gallery rails g controller Albums index&lt;/code&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
